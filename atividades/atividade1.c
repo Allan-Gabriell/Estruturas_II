@@ -1,21 +1,3 @@
-// #include <stdio.h>
-
-// int f(int n){
-//     if(n == 0){
-//         return 1;
-//     }
-//     int x = f(n-1);
-//     int y = 1/f(n-1);
-//     //return f(n -1) + 1/f(n - 1);
-//     return x + y;
-// }
-
-// int main(void){
-//     f(20);
-
-//     return 0;
-// }
-
 #include <stdio.h>
 
 
@@ -37,4 +19,3 @@ int main(void) {
 
     return 0;
 }
-
