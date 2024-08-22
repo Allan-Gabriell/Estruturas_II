@@ -26,6 +26,18 @@ No* inserirNovaVersao(No* raiz, int valor){
     return raiz;
 }
 
+int buscar(No* raiz, int chave){
+    if(raiz == NULL){
+        return -1;
+    } else if(raiz->dado == chave) {
+        return raiz->dado;
+    } else if(chave < raiz->dado){
+        return buscar(raiz->esquerda, chave);
+    } else {
+        return buscar(raiz->direita, chave);
+    }
+}
+
 void imprimir(No *raiz) {
     if (raiz != NULL) {
         imprimir(raiz->esquerda);
@@ -40,7 +52,7 @@ int main(void) {
     arv.raiz = NULL;
 
     do {
-        printf("\n0 - Sair \n1 - Inserir \n2 - Imprimir\n");
+        printf("\n0 - Sair \n1 - Inserir \n2 - Imprimir\n3 - Buscas\n");
         scanf("%d", &opcao);
 
         switch (opcao) {
@@ -56,6 +68,11 @@ int main(void) {
                 printf("Impressão da árvore binária: \n");
                 imprimir(arv.raiz);
                 break;
+            case 3:
+            printf("Qual valor deseja buscar? ");
+            scanf("%d", &valor);
+            printf("Resultado da busca: %d\n", buscar(arv.raiz, valor));
+            break;
             default:
                 printf("\nOpção Inválida...\n");
         }
