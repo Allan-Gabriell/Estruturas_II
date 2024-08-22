@@ -116,3 +116,5 @@ void imprimirArvore(struct Node* raiz) {
         imprimirArvore(raiz->dir);
     }
 }
+
+

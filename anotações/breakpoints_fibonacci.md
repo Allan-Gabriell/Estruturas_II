@@ -47,3 +47,5 @@
         breakpoint already hit 89 times
         ignore next 911 hits
         (gdb) quit
+
+# step entra numa função
