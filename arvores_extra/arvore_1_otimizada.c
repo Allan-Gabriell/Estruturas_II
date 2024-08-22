@@ -46,13 +46,41 @@ void imprimir(No *raiz) {
     }
 }
 
+No* remover(No* raiz, int chave){
+    if(raiz == NULL){
+        printf("Valor não encontrado... \n");
+        return NULL;
+    } else if(raiz->dado == chave){
+        if(raiz->esquerda == NULL && raiz->direita == NULL){
+            free(raiz);
+            return NULL;
+        } else{
+            if(raiz->esquerda != NULL || raiz->direita != NULL){
+                No *aux;
+                if(raiz->esquerda != NULL){
+                    aux = raiz->esquerda;
+                } else {
+                    aux = raiz->direita;
+                }
+                free(raiz);
+                return aux;
+            }
+        }
+    } else if(chave < raiz->dado){
+        raiz->esquerda = remover(raiz->esquerda, chave);
+    } else{
+        raiz->direita = remover(raiz->direita, chave);
+    }
+    return raiz; // Retorna o nó atualizado
+}
+
 int main(void) {
     int opcao, valor;
     ArvB arv;
     arv.raiz = NULL;
 
     do {
-        printf("\n0 - Sair \n1 - Inserir \n2 - Imprimir\n3 - Buscas\n");
+        printf("\n0 - Sair \n1 - Inserir \n2 - Imprimir\n3 - Buscas\n4 - Remover\n");
         scanf("%d", &opcao);
 
         switch (opcao) {
@@ -69,9 +97,14 @@ int main(void) {
                 imprimir(arv.raiz);
                 break;
             case 3:
-            printf("Qual valor deseja buscar? ");
-            scanf("%d", &valor);
-            printf("Resultado da busca: %d\n", buscar(arv.raiz, valor));
+                printf("Qual valor deseja buscar? ");
+                scanf("%d", &valor);
+                printf("Resultado da busca: %d\n", buscar(arv.raiz, valor));
+            break;
+            case 4:
+                printf("Informe o valor que deseja remover: ");
+                scanf("%d", &valor);
+                arv.raiz = remover(arv.raiz, valor);
             break;
             default:
                 printf("\nOpção Inválida...\n");
