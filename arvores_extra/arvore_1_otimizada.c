@@ -51,10 +51,12 @@ No* remover(No* raiz, int chave){
         printf("Valor não encontrado... \n");
         return NULL;
     } else if(raiz->dado == chave){
+        //Removendo nós folhas
         if(raiz->esquerda == NULL && raiz->direita == NULL){
             free(raiz);
             return NULL;
         } else{
+            //Removendo nós com apenas 1 filho
             if(raiz->esquerda != NULL || raiz->direita != NULL){
                 No *aux;
                 if(raiz->esquerda != NULL){
@@ -64,6 +66,16 @@ No* remover(No* raiz, int chave){
                 }
                 free(raiz);
                 return aux;
+            } else {
+                //Removendo nós com 2 filhos
+                No *aux = raiz->esquerda;
+                while(aux->direita != NULL){
+                    aux = aux->direita;
+                }
+                raiz->dado = aux->dado;
+                aux->dado = chave;
+                raiz->esquerda = remover(raiz->esquerda, chave);
+                return raiz;
             }
         }
     } else if(chave < raiz->dado){
